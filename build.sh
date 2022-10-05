@@ -10,15 +10,19 @@ export KBUILD_BUILD_HOST="etahamadCI" # this tells that you compiled your rom on
 # Initial Values
 deviceName="lavender" # change this to your device name.
 
+# clone and build era
 cd ~/home/xd
 
 rm -rf device/xiaomi/lavender device/xiaomi/sdm660-common vendor/xiaomi/lavender vendor/xiaomi/sdm660-common kernel/xiaomi/sdm660
+rm -rf hardware/qcom-caf/sdm660/media hardware/qcom-caf/sdm660/audio hardware/qcom-caf/sdm660/display
 
 git clone https://github.com/lavenderOSS/device_xiaomi_lavender device/xiaomi/lavender -b xd
 git clone https://github.com/lavenderOSS/device_xiaomi_sdm660-common device/xiaomi/sdm660-common
 git clone https://github.com/lavenderOSS/vendor_xiaomi_sdm660-common vendor/xiaomi/sdm660-common --depth=1
 git clone https://github.com/lavenderOSS/vendor_xiaomi_lavender vendor/xiaomi/lavender --depth=1
 git clone https://github.com/lavenderOSS/kernel_xiaomi_sdm660-4.19 kernel/xiaomi/sdm660 --depth=1
+
+repo sync -c -j4 --force-sync --no-clone-bundle --no-tags
 
 # This create a folder at the source directory and bind it to be used as ccache.
 echo "ccache setup for a13"
